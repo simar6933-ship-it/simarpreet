@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head>
+   ...
+   <style>
+      .product-img-wrap {
+          height: 240px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+      }
+
+      .product-img {
+          max-height: 100%;
+          width: auto;
+          object-fit: contain;
+          padding: 10px;
+      }
+   </style>
+</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NIKE — Just Do It</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #e8000d;
+      --black: #0a0a0a;
+      --off-white: #f5f0eb;
+      --mid-gray: #1c1c1c;
+      --text-muted-custom: #888;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--off-white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+    /* ─── NAVBAR ─────────────────────────────────── */
+    .navbar {
+      background: transparent;
+      padding: 1.2rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nike-logo {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--off-white);
+      font-family: 'Bebas Neue', sans-serif;
+    }
+    .nike-logo span { color: var(--red); }
+    .nav-link {
+      color: var(--off-white) !important;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem !important;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 1rem; right: 1rem;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link:hover { color: var(--red) !important; }
+    .btn-nav {
+      background: var(--red);
+      color: #fff !important;
+      border-radius: 2px;
+      padding: 0.45rem 1.3rem !important;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-nav:hover { background: #c0000a; transform: translateY(-1px); }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 22vw, 320px);
+      color: rgba(255,255,255,0.03);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 2px;
+      background: var(--red);
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 10vw, 130px);
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title .accent { color: var(--red); }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted-custom);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+    .btn-primary-custom {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      padding: 0.9rem 2.4rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary-custom::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.12);
+      transition: left 0.3s ease;
+    }
+    .btn-primary-custom:hover::before { left: 0; }
+    .btn-primary-custom:hover {
+      background: #c0000a;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(232,0,13,0.35);
+      color: #fff;
+    }
+    .btn-outline-custom {
+      background: transparent;
+      color: var(--off-white);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 2px;
+      padding: 0.9rem 2.4rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-outline-custom:hover {
+      border-color: var(--off-white);
+      color: var(--off-white);
+      transform: translateY(-2px);
+    }
+
+    /* hero shoe image / shape */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-circle {
+      width: clamp(340px, 45vw, 560px);
+      height: clamp(340px, 45vw, 560px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #2a0003, #0a0a0a);
+      border: 1px solid rgba(232,0,13,0.18);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatCircle 6s ease-in-out infinite;
+    }
+    .hero-circle::before {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(232,0,13,0.12);
+      animation: rotateSlow 22s linear infinite;
+    }
+    .hero-shoe-svg {
+      width: 85%;
+      max-width: 420px;
+      filter: drop-shadow(0 24px 64px rgba(232,0,13,0.25));
+    }
+    @keyframes floatCircle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* stats strip */
+    .stats-strip {
+      background: var(--mid-gray);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 1.8rem 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted-custom);
+      margin-top: 0.3rem;
+    }
+    .stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+      align-self: stretch;
+    }
+
+    /* ─── SECTION TITLES ─────────────────────────── */
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.95;
+      color: var(--off-white);
+      margin-bottom: 1.2rem;
+    }
+    .section-body {
+      font-size: 0.97rem;
+      color: var(--text-muted-custom);
+      line-height: 1.75;
+    }
+
+    /* ─── PRODUCTS ───────────────────────────────── */
+    .products-section { background: var(--black); padding: 6rem 0; }
+    .product-card {
+      background: var(--mid-gray);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 28px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,0,13,0.3);
+      border-color: rgba(232,0,13,0.3);
+    }
+    .product-img-wrap {
+      background: linear-gradient(135deg, #1a0a0a 0%, #1c1c1c 100%);
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: radial-gradient(ellipse at center bottom, rgba(232,0,13,0.1), transparent);
+    }
+    .shoe-icon {
+      width: 160px;
+      height: 90px;
+    }
+    .product-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+    .product-body { padding: 1.4rem; }
+    .product-category {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .product-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--off-white);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+    .product-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted-custom);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--off-white);
+    }
+    .btn-add {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--off-white);
+      border-radius: 2px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .btn-add:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    /* ─── FEATURE / INNOVATION SECTION ──────────── */
+    .innovation-section {
+      background: var(--mid-gray);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .innovation-section::before {
+      content: 'INNOVATION';
+      position: absolute;
+      right: -60px; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: rgba(255,255,255,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .feature-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    .feature-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(232,0,13,0.3);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(232,0,13,0.06);
+    }
+    .feature-text h5 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--off-white);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .feature-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted-custom);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .tech-visual {
+      position: relative;
+      height: 460px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tech-ring {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,0,13,0.15);
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tech-ring-inner {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,0,13,0.25);
+      background: radial-gradient(circle, rgba(232,0,13,0.07), transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .tech-center-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--off-white);
+      text-align: center;
+      line-height: 1.1;
+    }
+    .tech-center-text span { color: var(--red); display: block; font-size: 3rem; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    /* ─── COLLECTIONS ────────────────────────────── */
+    .collections-section { background: var(--black); padding: 6rem 0; }
+    .collection-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+    .collection-bg {
+      height: 100%;
+      min-height: 320px;
+      transition: transform 0.5s ease;
+    }
+    .collection-card:hover .collection-bg { transform: scale(1.04); }
+    .collection-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.2) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+    .collection-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .collection-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--off-white);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.02em;
+    }
+    .collection-cta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s;
+    }
+    .collection-card:hover .collection-cta { color: var(--off-white); }
+    .collection-cta::after {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+    .collection-card:hover .collection-cta::after { width: 36px; }
+    .coll-gradient-1 { background: linear-gradient(135deg, #1a0000 0%, #3a0a0a 40%, #1c1c1c 100%); }
+    .coll-gradient-2 { background: linear-gradient(135deg, #050510 0%, #0d1030 50%, #1c1c1c 100%); }
+    .coll-gradient-3 { background: linear-gradient(135deg, #001a00 0%, #0a1a0a 50%, #1c1c1c 100%); }
+
+    /* ─── QUOTE SECTION ──────────────────────────── */
+    .quote-section {
+      background: var(--red);
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-section::before {
+      content: '"';
+      position: absolute;
+      left: -20px; top: -40px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28rem;
+      color: rgba(255,255,255,0.07);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .quote-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5.5vw, 72px);
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+
+    }
+    .quote-author {
+      font-size: 0.82rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .quote-author::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* ─── NEWSLETTER ─────────────────────────────── */
+    .newsletter-section {
+      background: var(--mid-gray);
+      padding: 5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+    }
+    .newsletter-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      color: var(--off-white);
+      padding: 0.85rem 1.2rem;
+      font-size: 0.9rem;
+      outline: none;
+      font-family: 'Barlow', sans-serif;
+      transition: border-color 0.3s;
+    }
+    .newsletter-input::placeholder { color: var(--text-muted-custom); }
+    .newsletter-input:focus { border-color: rgba(232,0,13,0.5); }
+    .newsletter-btn {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 0 2px 2px 0;
+      padding: 0.85rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .newsletter-btn:hover { background: #c0000a; }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 3.5rem 0 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--off-white);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.8rem;
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted-custom);
+      margin-bottom: 1.8rem;
+    }
+    .footer-heading {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--off-white);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: 0.65rem; }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--text-muted-custom);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--off-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted-custom);
+    }
+    .social-links { display: flex; gap: 0.8rem; }
+    .social-link {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .social-link:hover {
+      border-color: var(--red);
+      background: rgba(232,0,13,0.1);
+    }
+    .social-link svg { width: 14px; height: 14px; fill: var(--off-white); }
+
+    /* ─── ANIMATIONS ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── TICKER ─────────────────────────────────── */
+    .ticker-wrap {
+      background: var(--red);
+      padding: 0.55rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-block;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker-item {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      padding: 0 2.5rem;
+    }
+    .ticker-dot {
+      display: inline-block;
+      width: 4px; height: 4px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 0.5rem;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { padding-top: 100px; }
+      .hero-title { font-size: 58px; }
+      .hero-circle { width: 280px; height: 280px; margin: 2rem auto 0; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid rgba(255,255,255,0.12); border-bottom: none; border-radius: 2px 2px 0 0; }
+      .newsletter-btn { border-radius: 0 0 2px 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand nike-logo" href="#">N<span>I</span>KE</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+        style="border-color: rgba(255,255,255,0.2); color: var(--off-white);">
+        <span style="background: var(--off-white); display:block; width:22px; height:2px; margin:5px 0;"></span>
+        <span style="background: var(--off-white); display:block; width:16px; height:2px; margin:5px 0;"></span>
+        <span style="background: var(--off-white); display:block; width:22px; height:2px; margin:5px 0;"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="#products">Shoes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Running</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Basketball</a></li>
+          <li class="nav-item ms-2"><a class="nav-link btn-nav" href="#">Shop Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg-text">NIKE</div>
+    <div class="container">
+      <div class="row align-items-center" style="min-height: 100vh; padding: 100px 0 60px;">
+        <div class="col-lg-6 reveal">
+          <div class="hero-label">New Season 2026</div>
+          <h1 class="hero-title">
+            JUST<br/>
+            <span class="accent">DO</span><br/>
+            IT.
+          </h1>
+          <p class="hero-subtitle">
+            Push past limits. The new Nike Air Max Pulse drops with redesigned cushioning technology built for those who never stop.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#products" class="btn-primary-custom">Shop Collection</a>
+            <a href="#" class="btn-outline-custom">Watch Film</a>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-visual reveal reveal-delay-2 mt-5 mt-lg-0">
+          <div class="hero-circle mx-auto">
+            <!-- Inline SVG Shoe -->
+            <svg class="hero-shoe-svg" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shoe sole -->
+              <ellipse cx="250" cy="245" rx="195" ry="22" fill="#1a0000" opacity="0.7"/>
+              <!-- Main shoe body -->
+              <path d="M80 200 Q60 185 65 165 Q70 140 100 130 L200 115 Q240 108 280 112 Q330 116 370 125 Q410 134 430 155 Q445 170 435 190 Q420 208 380 215 L150 225 Q100 228 80 200Z" fill="#2a2a2a"/>
+              <!-- Upper shoe -->
+              <path d="M100 130 Q130 100 175 90 Q210 82 250 85 Q295 88 330 100 Q360 112 370 125" fill="none" stroke="#3a3a3a" stroke-width="2"/>
+              <!-- Nike swoosh -->
+              <path d="M130 175 Q180 148 260 152 Q320 155 370 148 Q345 168 290 170 Q220 173 130 175Z" fill="#e8000d" opacity="0.9"/>
+              <!-- Laces area -->
+              <rect x="165" y="105" width="130" height="50" rx="5" fill="#222"/>
+              <!-- Lace lines -->
+              <line x1="175" y1="115" x2="285" y2="115" stroke="#555" stroke-width="1.5"/>
+              <line x1="175" y1="124" x2="285" y2="124" stroke="#555" stroke-width="1.5"/>
+              <line x1="175" y1="133" x2="285" y2="133" stroke="#555" stroke-width="1.5"/>
+              <line x1="175" y1="142" x2="285" y2="142" stroke="#555" stroke-width="1.5"/>
+              <!-- Toe cap -->
+              <path d="M65 165 Q62 150 80 138 Q100 128 130 125 L160 122 Q120 130 100 148 Q82 162 65 165Z" fill="#1e1e1e"/>
+              <!-- Heel detail -->
+              <path d="M370 125 Q410 134 430 155 Q435 168 428 182 Q418 200 400 210 L380 215 Q410 200 415 182 Q418 165 400 150 Q385 138 370 125Z" fill="#1e1e1e"/>
+              <!-- Air unit highlight -->
+              <ellipse cx="370" cy="200" rx="35" ry="14" fill="none" stroke="rgba(232,0,13,0.4)" stroke-width="1.5"/>
+              <ellipse cx="370" cy="200" rx="25" ry="9" fill="rgba(232,0,13,0.07)"/>
+              <!-- Sole stripe -->
+              <path d="M70 215 Q250 230 430 210 Q425 225 415 230 Q250 248 75 232 Q68 226 70 215Z" fill="#111"/>
+              <!-- White stripe on sole -->
+              <path d="M90 218 Q250 232 415 213 L415 217 Q250 237 90 222Z" fill="rgba(255,255,255,0.06)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">Just Do It<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Air Max Pulse 2026<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Free Shipping Over $100<span class="ticker-dot"></span></span>
+      <span class="ticker-item">New React Technology<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Limited Edition Drops<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Just Do It<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Air Max Pulse 2026<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Free Shipping Over $100<span class="ticker-dot"></span></span>
+      <span class="ticker-item">New React Technology<span class="ticker-dot"></span></span>
+      <span class="ticker-item">Limited Edition Drops<span class="ticker-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="row text-center justify-content-center g-0">
+        <div class="col-6 col-md-3 stat-item py-2">
+          <div class="stat-num">170+</div>
+          <div class="stat-label">Countries Worldwide</div>
+        </div>
+        <div class="d-none d-md-block col-auto stat-divider"></div>
+        <div class="col-6 col-md-3 stat-item py-2">
+          <div class="stat-num">51K+</div>
+          <div class="stat-label">Product Styles</div>
+        </div>
+        <div class="d-none d-md-block col-auto stat-divider"></div>
+        <div class="col-6 col-md-3 stat-item py-2">
+          <div class="stat-num">79M+</div>
+          <div class="stat-label">Global Members</div>
+        </div>
+        <div class="d-none d-md-block col-auto stat-divider"></div>
+        <div class="col-6 col-md-3 stat-item py-2">
+          <div class="stat-num">1971</div>
+          <div class="stat-label">Founded in Oregon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-6 reveal">
+          <div class="section-eyebrow">Featured Products</div>
+          <h2 class="section-title">THIS WEEK'S<br/>PICKS</h2>
+        </div>
+        <div class="col-lg-6 d-flex align-items-end reveal reveal-delay-2">
+          <p class="section-body">Curated for performance, crafted for style. From track to street, these are the silhouettes defining the season.</p>
+        </div>
+      </div>
+      <div class="row g-4">
+
+        <!-- Product 1 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="product-badge">New Drop</span>
+             <img src="img/shoe1.jpeg" class="product-img" alt="Nike Shoe">
+            </div>
+            <div class="product-body">
+              <div class="product-category">Running</div>
+              <div class="product-name">Air Max Pulse</div>
+              <div class="product-desc">React foam + Air unit delivers unmatched ride quality for daily training.</div>
+              <div class="product-footer">
+                <div class="product-price">$189</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="product-badge">Best Seller</span>
+             <img src="img/3051909-middle.png" class="product-img" alt="Nike Shoe">
+				
+            </div>
+            <div class="product-body">
+              <div class="product-category">Lifestyle</div>
+              <div class="product-name">Jordan Retro 1</div>
+              <div class="product-desc">Iconic silhouette. Premium leather upper with heritage court DNA.</div>
+              <div class="product-footer">
+                <div class="product-price">$230</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="product-badge">Limited</span>
+             <img src="img/img3.webp" class="product-img" alt="Nike Shoe">
+            </div>
+            <div class="product-body">
+              <div class="product-category">Training</div>
+              <div class="product-name">Free RN 5.0</div>
+              <div class="product-desc">Barefoot-inspired flexibility with a segmented outsole for natural motion.</div>
+              <div class="product-footer">
+                <div class="product-price">$149</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-1">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="img/img4.webp" class="img-fluid product-img" alt="Nike Shoe">
+            </div>
+            <div class="product-body">
+              <div class="product-category">Basketball</div>
+              <div class="product-name">LeBron XXI</div>
+              <div class="product-desc">Court-proven performance with Max Air unit and Zoom cushioning.</div>
+              <div class="product-footer">
+                <div class="product-price">$210</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-2">
+          <div class="product-card">
+            <div class="product-img-wrap">
+             <img src="img/img5.jpg" class="product-img" alt="Nike Shoe">
+            </div>
+            <div class="product-body">
+              <div class="product-category">Trail</div>
+              <div class="product-name">Wildhorse 8</div>
+              <div class="product-desc">Built for the relentless. Multi-surface traction for trail domination.</div>
+              <div class="product-footer">
+                <div class="product-price">$165</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="col-md-6 col-lg-4 reveal reveal-delay-3">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="product-badge">Sale</span>
+              <img src="img/img6.jpeg" class="img-fluid product-img" alt="Nike Shoe">
+            </div>
+            <div class="product-body">
+              <div class="product-category">Essentials</div>
+              <div class="product-name">Blazer Mid 77</div>
+              <div class="product-desc">Classic cupsole construction with vintage inspired details. Timeless.</div>
+              <div class="product-footer">
+                <div class="product-price" style="color: var(--red);">$99</div>
+                <button class="btn-add">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INNOVATION -->
+  <section class="innovation-section" id="innovation">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal">
+          <div class="section-eyebrow">Nike Technology</div>
+          <h2 class="section-title">BUILT<br/>FOR THE<br/>FUTURE</h2>
+          <p class="section-body mb-5">Every material, every stitch, every sole engineered to optimize human performance and minimize environmental impact.</p>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e8000d" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h5>React Infinity Foam</h5>
+              <p>Ultra-light, durable foam returns energy with every step, reducing injury rates by up to 52%.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e8000d" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h5>Air Max Cushioning</h5>
+              <p>Pressurized air units absorb impact forces during high-intensity movement for all-day comfort.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrap">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e8000d" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h5>Move to Zero Initiative</h5>
+              <p>Committed to zero carbon and zero waste using recycled materials across 60% of products.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 reveal reveal-delay-2">
+          <div class="tech-visual">
+            <div class="tech-ring">
+              <div class="tech-ring-inner">
+                <div class="tech-center-text">
+                  <span>52%</span>
+                  LESS<br/>INJURY
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section class="collections-section" id="collections">
+    <div class="container">
+      <div class="mb-5 reveal">
+        <div class="section-eyebrow">Explore Collections</div>
+        <h2 class="section-title">SHOP BY<br/>CATEGORY</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6 reveal reveal-delay-1">
+          <a href="#" class="collection-card" style="display: block;">
+            <div class="collection-bg coll-gradient-1" style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 260 140" width="220" style="opacity: 0.5;">
+                <path d="M35 112 Q20 98 24 82 Q29 62 50 56 L120 46 Q148 41 172 45 Q210 51 225 68 Q238 82 230 100 Q218 116 192 120 L70 124 Q42 126 35 112Z" fill="#e8000d"/>
+                <path d="M60 88 Q95 72 148 76 Q185 79 222 72 Q200 92 155 94 Q108 96 60 88Z" fill="rgba(255,255,255,0.15)"/>
+              </svg>
+            </div>
+            <div class="collection-overlay">
+              <div class="collection-tag">Performance</div>
+              <div class="collection-name">Running Essentials</div>
+              <div class="collection-cta">Explore</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-6 reveal reveal-delay-2">
+          <div class="row g-4 h-100">
+            <div class="col-12">
+              <a href="#" class="collection-card" style="display: block;">
+                <div class="collection-bg coll-gradient-2" style="min-height: 185px; display: flex; align-items: center; justify-content: center;">
+                  <svg viewBox="0 0 260 140" width="180" style="opacity: 0.45;">
+                    <path d="M35 112 Q20 98 24 82 Q29 62 50 56 L120 46 Q148 41 172 45 Q210 51 225 68 Q238 82 230 100 Q218 116 192 120 L70 124 Q42 126 35 112Z" fill="#4a90d9"/>
+                    <path d="M60 88 Q95 72 148 76 Q185 79 222 72 Q200 92 155 94 Q108 96 60 88Z" fill="rgba(255,255,255,0.12)"/>
+                  </svg>
+                </div>
+                <div class="collection-overlay">
+                  <div class="collection-tag">Court</div>
+                  <div class="collection-name">Basketball</div>
+                  <div class="collection-cta">Explore</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-12">
+              <a href="#" class="collection-card" style="display: block;">
+                <div class="collection-bg coll-gradient-3" style="min-height: 185px; display: flex; align-items: center; justify-content: center;">
+                  <svg viewBox="0 0 260 140" width="180" style="opacity: 0.45;">
+                    <path d="M35 112 Q20 98 24 82 Q29 62 50 56 L120 46 Q148 41 172 45 Q210 51 225 68 Q238 82 230 100 Q218 116 192 120 L70 124 Q42 126 35 112Z" fill="#2ecc71"/>
+                    <path d="M60 88 Q95 72 148 76 Q185 79 222 72 Q200 92 155 94 Q108 96 60 88Z" fill="rgba(255,255,255,0.12)"/>
+                  </svg>
+                </div>
+                <div class="collection-overlay">
+                  <div class="collection-tag">Heritage</div>
+                  <div class="collection-name">Lifestyle & Streetwear</div>
+                  <div class="collection-cta">Explore</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 reveal">
+          <div class="quote-text">
+            "The only way to do it is to do it. You can't just visualize and then go eat a sandwich."
+          </div>
+          <div class="quote-author">Mia Hamm — Nike Athlete</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 reveal">
+          <div class="section-eyebrow">Stay in the Game</div>
+          <h2 class="section-title" style="font-size: clamp(36px, 5vw, 60px);">GET EARLY<br/>ACCESS</h2>
+          <p class="section-body">Be first to know about new drops, exclusive member offers, and athlete stories.</p>
+        </div>
+        <div class="col-lg-7 reveal reveal-delay-2">
+          <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address"/>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+          <p style="font-size: 0.72rem; color: var(--text-muted-custom); margin-top: 0.8rem; letter-spacing: 0.05em;">
+            By subscribing you agree to Nike's Privacy Policy. Unsubscribe at any time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-logo">N<span>I</span>KE</div>
+          <div class="footer-tagline">Just Do It. Since 1971.</div>
+          <p style="font-size: 0.87rem; color: var(--text-muted-custom); line-height: 1.7; max-width: 300px;">
+            Bringing inspiration and innovation to every athlete in the world. If you have a body, you are an athlete.
+          </p>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <div class="footer-heading">Products</div>
+          <ul class="footer-links">
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Clothing</a></li>
+            <li><a href="#">Equipment</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Sale</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <div class="footer-heading">Sport</div>
+          <ul class="footer-links">
+            <li><a href="#">Running</a></li>
+            <li><a href="#">Basketball</a></li>
+            <li><a href="#">Soccer</a></li>
+            <li><a href="#">Training</a></li>
+            <li><a href="#">Golf</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About Nike</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Investors</a></li>
+            <li><a href="#">Sustainability</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2">
+          <div class="footer-heading">Help</div>
+          <ul class="footer-links">
+            <li><a href="#">Order Status</a></li>
+            <li><a href="#">Delivery</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Size Guide</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2026 Nike, Inc. All Rights Reserved.</div>
+        <div class="social-links">
+          <!-- Twitter/X -->
+          <a href="#" class="social-link" aria-label="X">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.638L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Cart button feedback
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const orig = this.textContent;
+        this.textContent = 'Added!';
+        this.style.background = 'var(--red)';
+        this.style.borderColor = 'var(--red)';
+        this.style.color = '#fff';
+        setTimeout(() => {
+          this.textContent = orig;
+          this.style.background = '';
+          this.style.borderColor = '';
+          this.style.color = '';
+        }, 1400);
+      });
+    });
+  </script>
+</body>
+</html>
